@@ -1,0 +1,4 @@
+.env
+manager_dashboard_venv/
+__pycache__/
+migrations/
