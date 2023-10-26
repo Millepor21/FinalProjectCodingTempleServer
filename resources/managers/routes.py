@@ -6,7 +6,7 @@ from schemas import ManagerSchema, AuthUserSchema, UpdateUserSchema, ManagerEmpl
 from . import bp
 from .ManagerModel import ManagerModel
 
-@bp.route('/manger')
+@bp.route('/manager')
 class ManagerList(MethodView):
     
     @bp.response(200, ManagerSchema(many=True))
