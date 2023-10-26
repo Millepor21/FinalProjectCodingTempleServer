@@ -20,7 +20,7 @@ class ManagerModel(db.Model):
         return check_password_hash(self.password_hash, password)
   
     def from_dict(self, dict):
-        password = dict.pop('password')
+        password = dict.pop("password")
         self.hash_password(password)
         for k,v in dict.items():
             setattr(self, k, v)
