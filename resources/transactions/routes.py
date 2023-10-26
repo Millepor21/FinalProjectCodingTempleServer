@@ -8,7 +8,7 @@ from schemas import TransactionSchema
 from . import bp
 from .TransactionModel import TransactionModel
 
-bp.route('/transaction')
+@bp.route('/transaction')
 class TransactionList(MethodView):
     
     @bp.response(200, TransactionSchema)
@@ -29,7 +29,7 @@ class TransactionList(MethodView):
                 abort(400, message='Invalid Employee Id')
         abort(400, message='Only employees can create transactions')
 
-bp.route('/transaction/<transaction_id>')
+@bp.route('/transaction/<transaction_id>')
 class Transaction(MethodView):
     
     @jwt_required()
