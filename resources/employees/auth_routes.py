@@ -6,7 +6,7 @@ from schemas import AuthUserSchema, EmployeeSchema
 from . import bp 
 from .EmployeeModel import EmployeeModel
 
-@bp.post('/register')
+@bp.post('/register_employee')
 @bp.arguments(EmployeeSchema)
 @bp.response(201, EmployeeSchema)
 def register(employee_data):
@@ -18,7 +18,7 @@ def register(employee_data):
     except IntegrityError:
         abort(400, message='Username Already Taken')
 
-@bp.post('/login')
+@bp.post('/login_employee')
 @bp.arguments(AuthUserSchema)
 def login(login_info):
     employee = EmployeeModel.query.filter_by(username=login_info['username']).first()
