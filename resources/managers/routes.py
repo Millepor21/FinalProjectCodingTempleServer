@@ -46,3 +46,16 @@ class Manager(MethodView):
     def get(self, manager_id):
         manager = ManagerModel.query.get_or_404(manager_id, description='Manager Not Found')
         return manager
+    
+@bp.route('/manager/account')
+class Manager(MethodView):
+    
+    @jwt_required()
+    @bp.response(200, ManagerEmployeesSchema)
+    def get(self):
+        manager_id = get_jwt_identity()
+        if manager_id in ManagerModel.id:
+            manager = ManagerModel.query.get_or_404(manager_id, description='Manager Not Found')
+        else:
+            abort(400, message="Not a manager")
+        return manager
