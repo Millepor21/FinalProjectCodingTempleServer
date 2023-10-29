@@ -48,7 +48,7 @@ class Manager(MethodView):
         return manager
     
 @bp.route('/manager/account')
-class Manager(MethodView):
+class ManagerAccount(MethodView):
     
     @jwt_required()
     @bp.response(200, ManagerEmployeesSchema)
