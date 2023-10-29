@@ -12,10 +12,10 @@ from .EmployeeModel import EmployeeModel
 def register(employee_data):
     employee = EmployeeModel()
     employee.from_dict(employee_data)
-    try:
+    if employee_data['username'] not in EmployeeModel.username:
         employee.save()
         return employee_data
-    except IntegrityError:
+    else:
         abort(400, message='Username Already Taken')
 
 @bp.post('/login_employee')
