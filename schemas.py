@@ -17,9 +17,9 @@ class EmployeeSchema(Schema):
 class TransactionSchema(Schema):
     id = fields.Int(dump_only=True)
     amount = fields.Str(required=True)
-    date = fields.Str(required=True)
+    date = fields.Str()
     customer_name = fields.Str(required=True)
-    employee_id = fields.Int(required = True)
+    employee_id = fields.Int()
 
 class EmployeeTransactionsSchema(Schema):
     transactions = fields.List(fields.Nested(TransactionSchema), dump_only=True)

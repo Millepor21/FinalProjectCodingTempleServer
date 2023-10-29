@@ -18,7 +18,7 @@ class EmployeeList(MethodView):
     @bp.arguments(AuthUserSchema)
     def delete(self, employee_data):
         employee_id = get_jwt_identity()
-        employee = EmployeeModel.query.get(employee_id)
+        employee = EmployeeModel.query.get(id=employee_id)
         if employee and employee.username == employee_data['username'] and employee.check_password(employee_data['password']):
             employee.delete()
             return {'message':f'{employee_data["username"]} deleted'}
@@ -29,7 +29,7 @@ class EmployeeList(MethodView):
     @bp.response(202, EmployeeSchema)
     def put(self, employee_data):
         employee_id = get_jwt_identity()
-        employee = EmployeeModel.query.get(employee_id)
+        employee = EmployeeModel.query.get(id=employee_id)
         if employee and employee.check_password(employee_data['password']) and employee.username == employee_data['username']:
             try:
                 employee.from_dict(employee_data)
@@ -44,5 +44,5 @@ class Employee(MethodView):
     
     @bp.response(200, EmployeeTransactionsSchema)
     def get(self, employee_id):
-        employee = EmployeeModel.query.get_or_404(employee_id, description='Employee Not Found')
+        employee = EmployeeModel.query.get_or_404(id=employee_id, description='Employee Not Found')
         return employee
