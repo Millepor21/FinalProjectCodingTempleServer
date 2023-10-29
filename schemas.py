@@ -13,6 +13,7 @@ class EmployeeSchema(Schema):
     password = fields.Str(required=True)
     first_name = fields.Str(required=True)
     last_name = fields.Str(required=True)
+    manager_id = fields.Str(required=True)
 
 class TransactionSchema(Schema):
     id = fields.Int(dump_only=True)

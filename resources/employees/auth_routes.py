@@ -25,4 +25,4 @@ def login(login_info):
     if employee and employee.check_password(login_info['password']):
         access_token = create_access_token(identity=employee.id)
         return {'access_token':access_token}
-    abort(400, message='Invalid Username or Password')
+    abort(400, message='Invalid Username or Password') 
