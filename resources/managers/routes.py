@@ -56,6 +56,6 @@ class ManagerAccount(MethodView):
         manager_id = get_jwt_identity()
         if manager_id in ManagerModel.id:
             manager = ManagerModel.query.get(id=manager_id, description='Manager Not Found')
+            return manager
         else:
             abort(400, message="Not a manager")
-        return manager
