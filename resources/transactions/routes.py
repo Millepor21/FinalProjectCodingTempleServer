@@ -43,7 +43,7 @@ class Transaction(MethodView):
     @jwt_required()
     def delete(self, transaction_id):
         manager_id = get_jwt_identity()
-        t = TransactionModel.query.get(id=transaction_id)
+        t = TransactionModel.query.get(transaction_id)
         if t and manager_id in ManagerModel.id:
             if t.employee_id in EmployeeModel.query.filter_by(manager_id=manager_id).all():
                 t.delete()
