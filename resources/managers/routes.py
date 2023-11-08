@@ -18,7 +18,7 @@ class ManagerList(MethodView):
     @bp.arguments(AuthUserSchema)
     def delete(self, manager_data):
         manager_id = get_jwt_identity()
-        manager = ManagerModel.query.get(id=manager_id)
+        manager = ManagerModel.query.get(manager_id)
         if manager and manager.username == manager_data['username'] and manager.check_password(manager_data['password']):
             manager.delete()
             return {'message':f'{manager_data["username"]} deleted'}
@@ -29,7 +29,7 @@ class ManagerList(MethodView):
     @bp.response(202, ManagerSchema)
     def put(self, manager_data):
         manager_id = get_jwt_identity()
-        manager = ManagerModel.query.get(id=manager_id)
+        manager = ManagerModel.query.get(manager_id)
         if manager and manager.check_password(manager_data['password']) and manager.username == manager_data['username']:
             try:
                 manager.from_dict(manager_data)
@@ -44,7 +44,7 @@ class Manager(MethodView):
     
     @bp.response(200, ManagerEmployeesSchema)
     def get(self, manager_id):
-        manager = ManagerModel.query.get_or_404(id=manager_id, description='Manager Not Found')
+        manager = ManagerModel.query.get_or_404(manager_id, description='Manager Not Found')
         return manager
     
 @bp.route('/manager/account')
@@ -55,7 +55,7 @@ class ManagerAccount(MethodView):
     def get(self):
         manager_id = get_jwt_identity()
         if manager_id in ManagerModel.id:
-            manager = ManagerModel.query.get(id=manager_id, description='Manager Not Found')
+            manager = ManagerModel.query.get(manager_id, description='Manager Not Found')
             return manager
         else:
             abort(400, message="Not a manager")

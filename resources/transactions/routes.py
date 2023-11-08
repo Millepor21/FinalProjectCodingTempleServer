@@ -35,7 +35,7 @@ class Transaction(MethodView):
     @jwt_required()
     @bp.response(200, TransactionSchema)
     def get(self, transaction_id):
-        t = TransactionModel.query.get(id=transaction_id)
+        t = TransactionModel.query.get(transaction_id)
         if t:
             return t
         abort(400, message='Invalid Transaction Id')
