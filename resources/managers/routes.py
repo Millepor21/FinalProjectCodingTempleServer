@@ -11,8 +11,7 @@ class ManagerList(MethodView):
     
     @bp.response(200, ManagerSchema(many=True))
     def get(self):
-        managers = ManagerModel.query.all()
-        return managers
+        return ManagerModel.query.all()
     
     @jwt_required()
     @bp.arguments(AuthUserSchema)
