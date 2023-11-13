@@ -53,8 +53,8 @@ class ManagerAccount(MethodView):
     @bp.response(200, ManagerEmployeesSchema)
     def get(self):
         manager_id = get_jwt_identity()
-        if manager_id in ManagerModel.id:
-            manager = ManagerModel.query.get(manager_id, description='Manager Not Found')
+        manager = ManagerModel.query.get(manager_id, description='Manager Not Found')
+        if manager:
             return manager
         else:
             abort(400, message="Not a manager")
