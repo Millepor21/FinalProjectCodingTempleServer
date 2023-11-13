@@ -13,14 +13,16 @@ class TransactionList(MethodView):
     
     @bp.response(200, TransactionSchema)
     def get(self):
-        return TransactionModel.query.all()
+        transactions = TransactionModel.query.all()
+        return transactions
     
     @jwt_required()
     @bp.arguments(TransactionSchema)
     @bp.response(200, TransactionSchema)
     def post(self, transaction_data):
         employee_id = get_jwt_identity()
-        if employee_id in EmployeeModel.id:
+        employee = EmployeeModel.query.get(employee_id)
+        if employee:
             transaction = TransactionModel(**transaction_data, employee_id=employee_id)
             try:
                 transaction.save()

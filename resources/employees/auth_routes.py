@@ -12,7 +12,7 @@ from .EmployeeModel import EmployeeModel
 def register(employee_data):
     employee = EmployeeModel()
     employee.from_dict(employee_data)
-    if employee_data['username'] not in EmployeeModel.username:
+    if not EmployeeModel.query.filter_by(username=employee_data['username']).first():
         employee.save()
         return employee_data
     else:
