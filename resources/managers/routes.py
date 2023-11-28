@@ -50,7 +50,7 @@ class Manager(MethodView):
 class ManagerAccount(MethodView):
     
     @jwt_required()
-    @bp.response(200, ManagerEmployeesSchema)
+    @bp.response(200, ManagerSchema)
     def get(self):
         manager_id = get_jwt_identity()
         manager = ManagerModel.query.get_or_404(manager_id, description='Manager Not Found')
