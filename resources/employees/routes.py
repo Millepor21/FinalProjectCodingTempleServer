@@ -42,7 +42,7 @@ class EmployeeList(MethodView):
 @bp.route('/employees/<employee_id>')
 class Employee(MethodView):
     
-    @bp.response(200, EmployeeTransactionsSchema)
+    @bp.response(200, EmployeeSchema)
     def get(self, employee_id):
         employee = EmployeeModel.query.get_or_404(employee_id, description='Employee Not Found')
         return employee
